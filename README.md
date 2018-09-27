@@ -9,7 +9,7 @@ Do ponto de vista da flexibilidade, o jellyfish permite que qualquer número de 
 
 A Figura 9 do artigo representa os resultados do uso dos mecanismos de controle de congestionamento – ECMP_8, ECMP_64 e 8_shortest Path. Observa-se que no ECMP, mais de 55% dos links são utilizados por não menos que 2 caminhos, enquanto que no 8_shortest Path, esse percentual cai para 6%. Isso demonstra que o mecanismo 8_shortest Path aproveita melhor a diversidade de caminhos oferecida.
 
-##### Inserir Figura 9 original aqui
+![](https://github.com/agnaldosb/INFO7015_jellyfish/blob/master/figures/Figura9.png)
 
 A Tabela 1 do artigo apresenta os resultados das simulações de troca de pacotes realizadas, permitindo a comparação do desempenho do jellyfish com o fat-tree. Observa-se que o jellyfish apresenta uma pequena melhora em relação ao fat-tree. Porém, essa pequena melhora tem um peso maior se considerarmos que o jellyfish foi testado com 780 servidores, enquanto o fat-tree, 686 servidores. Tem-se uma diferença de 13,7% no número de servidores a favor do jellyfish.
 

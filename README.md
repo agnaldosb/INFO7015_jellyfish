@@ -7,11 +7,11 @@ Os autores avaliaram o jellyfish sobre três pontos de vista: eficiência, flexi
 
 Do ponto de vista da flexibilidade, o jellyfish permite que qualquer número de racks seja conectado em rede de maneira eficiente, contrastando com outras soluções, que dependem da disponibilidade de portas livres nos switches. A expansão do jellyfish se dá pelo cabeamento das portas que estão sendo adicionadas à rede, o que torna esse processo mais simples. Em relação à resiliência à falhas, o jellyfish apresenta uma boa redundância de caminhos, aproximando-se de um grafo conexo. Comparado ao fat-tree, ele apresenta um throughput decrescente à medida que aumenta o número de links com falhas, porém de maneira mais lenta que o fat-tree.
 
-A Figura 9 do artigo representa os resultados do uso dos mecanismos de controle de congestionamento – ECMP_8, ECMP_64 e 8_shortest Path. Observa-se que no ECMP, mais de 55% dos links são utilizados por não menos que 2 caminhos, enquanto que no 8_shortest Path, esse percentual cai para 6%. Isso demonstra que o mecanismo 8_shortest Path aproveita melhor a diversidade de caminhos oferecida.
+A Figura 9 do artigo representa os resultados do uso dos mecanismos de controle de congestionamento – ECMP_8, ECMP_64 e 8\_shortest Path. Observa-se que no ECMP, mais de 55% dos links são utilizados por não menos que 2 caminhos, enquanto que no 8\_shortest Path, esse percentual cai para 6%. Isso demonstra que o mecanismo 8_shortest Path aproveita melhor a diversidade de caminhos oferecida.
 
 ![](https://github.com/agnaldosb/INFO7015_jellyfish/blob/master/figures/Figura9.png)
 
-A Tabela 1 do artigo apresenta os resultados das simulações de troca de pacotes realizadas, permitindo a comparação do desempenho do jellyfish com o fat-tree. Observa-se que o jellyfish apresenta uma pequena melhora em relação ao fat-tree. Porém, essa pequena melhora tem um peso maior se considerarmos que o jellyfish foi testado com 780 servidores, enquanto o fat-tree, 686 servidores. Tem-se uma diferença de 13,7% no número de servidores a favor do jellyfish.
+A Tabela 1 do artigo apresenta os resultados das simulações de troca de pacotes realizadas, permitindo a comparação do desempenho do jellyfish com o fat-tree. Observa-se que o jellyfish apresenta uma pequena melhora em relação ao fat-tree. Porém, essa melhora tem um peso maior se considerarmos que o jellyfish foi testado com 780 servidores, enquanto o fat-tree, 686 servidores. Tem-se uma diferença de 13,7% no número de servidores a favor do jellyfish.
 
 ![](https://github.com/agnaldosb/INFO7015_jellyfish/blob/master/figures/Tabela1.png)
 
@@ -33,74 +33,71 @@ Não estendi. Realizei o experimento em parte, não tendo sucesso na implementa�
 
 ## Reprodução da Figura 9 e da Tabela 1 
 
-Para reprodução da Figura 9 e da Tabela 1, foi utilizado como referência o trabalho disponível em https://github.com/aghalayini/CS244_jellyfish. Esse pesquisador implementou a Figura 9, bem como parte dos testes constantes da Tabela 1, porém apenas para o jellyfish.
+Para reprodução da Figura 9 e da Tabela 1, foi utilizado como referência o trabalho disponível em https://github.com/aghalayini/CS244_jellyfish. O autor implementou a Figura 9, bem como parte dos testes constantes da Tabela 1, porém apenas para o jellyfish.
 
 Foi necessário realizar algumas modificações no trabalho citado, a fim de adequá-lo aos requisitos da disciplina. As dificuldades em torno desse experimento foram diversas:
+
 - Os recursos de hardware disponíveis não são suficientes para testar com o mesmo número de servidores que os autores do artigo utilizaram. Dessa forma, reduzi os testes a 10 servidores.
+
 - Os testes com o protocolo TCP com 1 fluxo funcionaram normalmente. Porém, quando foi modificado para 8 fluxos, os resultados sofreram algumas variações, quando foi necessário avaliar os arquivos de resultados isoladamente.
 - No caso do protocolo MPTCP, quando são testados 8 fluxos, ocorreu a mesma situação do protocolo TCP, quando foi necessário avaliar os arquivos de resultados isoladamente.
 - Não consegui implementar o algoritimo fat-tree a fim de viabilizar os testes e posteriores comparações com o jellyfish.
 
-### Resultados obtidos
-
-#### Inserir a Figura 9 obtida aqui!
-
-Observa-se que a Figura 9 obtida assemelha-se em grande medida àquela existente no artigo original.
-
-#### Inserir a Tabela 1 obtida aqui!
-
-Os resultados obtidos encontram-se na tabela abaixo. Comparando-se essa tabela com àquela do artigo, observa-se que apenas o resultado do teste do protocolo TCP com 1 fluxo e usando o 8_shortest se aproximou-se do resultado do artigo. Os demais ficaram muito distantes dos valores do artigo. As causas prováveis para essa disparidade de valores pode estar no número de servidores utilizados nos testes, por exemplo.
-
-
 ### Instalação e execução do experimento
-
-Para realização do experimento, foi feita a configuração dos parâmetros relativos à topologia do Jellyfish, que pode ser estabelecida no arquivo build_topology.py da seguinte forma:
-
-### Explicar a geração da figura e a troca dos parâmetros para as simulações
 
 Para executar o experimento, seguir seguintes passos:
 
-1. Assegure-se de que o python2 e o pip2 estão instalados.
-2. Executar “pip2 install matplotlib”
-3. Executar “pip2 install networkx”
-4. Executar “git clone git://github.com/mininet/mininet”
-5. Executar “mininet/util/install.sh -a”
-7. Usando o comando “ls”, você constatará diversas pastas e arquivos.
-8. Executar “git clone https://github.com/agnaldosb/INFO7015_jellyfish”
-9. Executar “cd INFO7015_jellyfish/pox/ext/”
+- Assegure-se de que o python2 e o pip2 estão instalados.
+- Executar “pip2 install matplotlib”
+- Executar “pip2 install networkx”
+- Executar “git clone git://github.com/mininet/mininet”
+- Executar “mininet/util/install.sh -a”
+- Usando o comando “ls”, você constatará diversas pastas e arquivos.
+- Executar “git clone https://github.com/agnaldosb/INFO7015_jellyfish”
+- Executar “cd INFO7015_jellyfish/pox/ext/”
+- A partir desse momeno, os trabalhos serão realizdos a partir desta pasta.
 
-#### Geração da Figura 9
+### Resultados obtidos
 
-Para gerar a figura 9, após a configuração para execução do experimento conforme passos acima, proceder da seguinte forma:
+#### Reprodução da Figura 9
 
--  Executar “python2 ./graph.py”: Você observará dois arquivos .svg no diretório corrente. O arquivo 1.svg representa a Figura 9 do artigo, enquanto o arquivo 2.svg é a forma do gráfico randomico.
+Para gerar a Figura 9, após a configuração para execução do experimento conforme passos acima,  executar no terminal o comado “python2 ./graph.py”. Serão criados dois arquivos .svg no diretório corrente. O arquivo 1.svg representa a Figura 9 do artigo, enquanto o arquivo 2.svg é a forma do gráfico randomico.
 
-#### Realização dos testes
+Observa-se que a Figura 9 obtida assemelha-se em grande medida àquela existente no artigo original. A quantidade de servidores utilizados para cálcula foi a mesma daquela utilizada no artigo.
 
-Para executar os testes, que permitiram a elaboração de parte da Tabela 1, deve-se observar os seguintes passos:
+![](https://github.com/agnaldosb/INFO7015_jellyfish/blob/master/figures/Figure9_results.png)
 
-1. Modificar os parâmetros constantes no arquivo build_topology.py, que se encontra na pasta INFO7015_jellyfish/pox/ext. Os parâmetros de interesse são os seguintes:
+#### Reprodução da Tabela 1
 
-- (Parameters)
-- r_method = '8_shortest' # 'ecmp8', 'ecmp64' or '8_shortest'
-- number_of_tcp_flows = 8 # should be 1 or 8
-- nx_topology = NXTopology(number_of_servers=10, switch_graph_degree=3, number_of_links=15)
+Os testes envolvendo a reprodução da Tabela 1 do artigo original foram feitos com diversos cenários, onde foi necessário modificar o roteamento - ecmp8 ou 8\_shortest - e a quantidade de fluxos - 1 ou 8. Os demais parâmetros foram mantidos inalterados. Esses  parâmetros são modificados no arquivo 'build\_topology.py', que se encontra na pasta INFO7015_jellyfish/pox/ext. Os parâmetros de interesse são os seguintes:
 
-3. Nos testes realizados foram usados 10 servidores. Os parãmetros que devem ser modificados conforme o teste a ser realizado são o controle de congestionamento (r_method) e o número de fluxos.
-2. Executar “sudo python2 ./build_topology.py”: A simulação será realizada, sendo que os resultados do Iperf para cada servidor serão registrados no arquivo .out no diretório /ext, enquanto que os erros que surgirem serão armazenados nos arquivos .err. O throughput médio será impresso ao final dos testes. Você pode modificar os parâmetros na seção parameteres section do arquivo build_topology.py.
+	- r_method = '8_shortest' # 'ecmp8', 'ecmp64' or '8_shortest'
+	- number_of_tcp_flows = 8 # should be 1 or 8
+	
+- Para obtenção dos resultados da tabela 1, foram realizadas 5 simulações para cada cenário e feita a média aritmética simples dos valores obtidos.
+- Foram usados 10 servidores para avaliação, haja vista o tempo de teste tornar-se demasiadamente longo à medida que a quantidade de servidores é aumentada.
+- Para executar os testes, deve-se excecutar o comando “sudo python2 ./build\_topology.py”. Os resultados do Iperf para cada servidor serão registrados no arquivo .out no diretório /ext, enquanto que os erros que surgirem serão armazenados nos arquivos .err. O throughput médio será impresso ao final dos testes. 
 
-### Configurações do ambiente de simulação
+Os resultados obtidos encontram-se na tabela abaixo. Comparando-se essa tabela com àquela do artigo, observa-se que apenas o resultado do teste do protocolo TCP com 1 fluxo e usando o 8_shortest se aproximou-se do resultado do artigo. Os demais ficaram muito distantes dos valores do artigo. As causas prováveis para essa disparidade de valores pode estar no número de servidores utilizados nos testes, por exemplo.
+
+![](https://github.com/agnaldosb/INFO7015_jellyfish/blob/master/figures/Tabela1_results.png)
+
+Essa distinção de resultados era esperada, haja vista que o cenário avaliado não foi exatamente o mesmo do artigo original, especialmente em relação à quantidade de servidores. Adicionalmente, nos testes envolvendo 8 fluxos e 8 subfluxos, os resultados apresentaram muitos erros em relação ao troughput. Após pesquisa, foi verificado que o Iperf não lidava adequadamente com diversos fluxos. Em geral, ele tratava adequadamente até 5 fluxos, às vezes excedendo esse número. Porém, em momento algum o Iperf apresentou resultados satisfatórios para 8 fluxos em um mesmo teste.
+
+## Configurações do ambiente de simulação
 
 Para realização das simulações, foi instalado o sistema operacional Linux Ubuntu, cujo kernel foi recompilado para incorporar o protocolo MPTCP. Esse sistema operacional foi instalado em uma máquina virtual no VM VirtualBox. Os experimentos foram realizados no Mininet.
 
-#### Configurações de hardware:
+No caso da Tabela 1, que demandava testes com os protocolos TCP e MPTCP, foi necessário configurar o kernel para habilitar o MPTCP.
+
+### Configurações de hardware
 
 - Desktop Dell Inspiron 
 - Processador Intel(R) Core(TM) i5-4460S CPU @ 2.90GHz
 - 64 bits
 - 8GB memória RAM
 
-#### Softwares utilizados
+### Softwares utilizados
 
 - Sistema operacional Linux Ubuntu - versão 16.04.5 LTS
 - Kernel - versão 4.14.64MPTCP+ (recompilado para incorporar o protocolo MPTCP)
